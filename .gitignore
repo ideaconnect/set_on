@@ -18,5 +18,4 @@ vendor-doc
 /src/nbproject/private/
 /nbproject/private/
 /nbproject
-/src
 *.lock
