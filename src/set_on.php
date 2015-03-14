@@ -39,12 +39,29 @@ class set_on {
 
     static protected $_instance = null;
 
+    /**
+     * Method which adds the variable to the collection which will be executed when an object is passed.
+     *
+     * Public for usage by the static construction on first use.
+     * @param string $var
+     * @param mixed $val
+     * @return self
+     */
     public function addVar($var, $val) {
         $this->calls[$var] = $val;
 
         return $this;
     }
 
+    /**
+     * Main method
+     *
+     * Use with a mix of string -> value to set the variable or with an object to execute the previously set variables
+     *
+     * @param string|object $var
+     * @param mixed $val
+     * @return boolean|self
+     */
     public function _ ($var = null, $val = null) {
 
         if (self::$_instance === null && (is_object($var) || is_null($var))) {
