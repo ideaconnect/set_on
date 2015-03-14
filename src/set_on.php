@@ -49,8 +49,6 @@ class set_on {
      */
     public function addVar($var, $val) {
         $this->calls[$var] = $val;
-
-        return $this;
     }
 
     /**
@@ -63,27 +61,31 @@ class set_on {
      * @return boolean|self
      */
     public function _ ($var = null, $val = null) {
-
-        if (self::$_instance === null && (is_object($var) || is_null($var))) {
-            trigger_error("Set variables first.",E_USER_ERROR);
-        } else if (self::$_instance === null && is_string($var)) {
+        if(!(isset($this) && get_class($this) == __CLASS__)) {
+            //we entered from static context
             self::$_instance = new self;
-            self::$_instance->addVar($var, $val);
-            return self::$_instance;
-        } else if (self::$_instance !== null && is_string($var)) {
-            return $this->addVar($var, $val);
+            $me = self::$_instance;
         } else {
-            return self::$_instance->r($var);
+            //we entered via instance
+            $me = $this;
         }
+
+        if(is_string($var) && !empty($var)) {
+            $me->addVar($var, $val);
+            return $me;
+        } else if (is_object($var)) {
+            return $this->r($var);
+        }
+
     }
 
-    protected function r ($object) {
-        if(is_object($object)) {
+    protected function r ($depedencyObject) {
+        if(is_object($depedencyObject)) {
             foreach($this->calls as $var => $val) {
-                $attr = new ReflectionProperty(get_class($object), $var);
+                $attr = new ReflectionProperty(get_class($depedencyObject), $var);
                 if($attr->isPublic() !== true) {
                     $attr->setAccessible(true);
-                    $attr->setValue($object,$val);
+                    $attr->setValue($depedencyObject,$val);
                 }
             }
             $this->calls = array();
