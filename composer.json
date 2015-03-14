@@ -1,0 +1,35 @@
+{
+    "name": "idct/set_on",
+    "description": "set_on (known as 'with' in other development platforms) control structure emulator.",
+    "type": "library",
+    "keywords": [
+        "php",
+        "control structure",
+        "with",
+        "code"
+    ],
+    "homepage": "https://github.com/ideaconnect/set_on",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bartosz Pacho?ek",
+            "email": "bartosz@ideaconnect.pl",
+            "role": "lead"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/ideaconnect/set_on/issues"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "include-path": [
+        ""
+    ]
+}
