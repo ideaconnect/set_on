@@ -16,6 +16,15 @@
     <IncludeDebugInformation>false</IncludeDebugInformation>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="index.php" />
+    <Compile Include="src\set_on.php" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="composer.json" />
+    <Content Include="LICENSE" />
+    <Content Include="readme.md" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 <?php
-
+namespace idct;
 /**
  * set_on is a reversed 'with' constrol structure (known from other software development environments) emulator.
  *

@@ -25,13 +25,23 @@ and an instance of the class:
 $myTester = new Tester();
 ````
 
-You can call:
+Now within for example constructor of that class you would like some variable setting to happen normally you would use:
 ````php
-    set_on::_('variable1', $someValue)
-            ->_('variable2', 'Test Value')
-            ->_('variable3', $someValue2)
-            ->_('variable4', 43134)
-            ->_($myTester);
+public function __construct() {
+    $this->variable1 = "something";
+    $this->variable2 = "somethingelse";
+    $this->variable3 = "testest";
+    $this->variable4 = array();
+}
+````
+
+with set_on you can do:
+````php
+    set_on::_('variable1', "something")
+            ->_('variable2', "somethingelse")
+            ->_('variable3', "testtest")
+            ->_('variable4', array())
+            ->_($this);
 ````
 
 It is bad, you know?
