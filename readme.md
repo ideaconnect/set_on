@@ -44,6 +44,11 @@ with set_on you can do:
             ->_($this);
 ````
 
+Main use case
+=============
+
+The main use case is to set internal protected/private variables without the need of overloading any magic methods and without repeating every line *$this->*
+
 It is bad, you know?
 ====================
 Yes.
