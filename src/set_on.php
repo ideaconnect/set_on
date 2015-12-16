@@ -1,5 +1,5 @@
 <?php
-namespace idct;
+namespace IDCT;
 /**
  * set_on is a reversed 'with' constrol structure (known from other software development environments) emulator.
  *
@@ -74,7 +74,7 @@ class set_on {
             $me->addVar($var, $val);
             return $me;
         } else if (is_object($var)) {
-            return $this->r($var);
+            return $me->r($var);
         }
 
     }
@@ -82,7 +82,7 @@ class set_on {
     protected function r ($depedencyObject) {
         if(is_object($depedencyObject)) {
             foreach($this->calls as $var => $val) {
-                $attr = new ReflectionProperty(get_class($depedencyObject), $var);
+                $attr = new \ReflectionProperty(get_class($depedencyObject), $var);
                 if($attr->isPublic() !== true) {
                     $attr->setAccessible(true);
                     $attr->setValue($depedencyObject,$val);
