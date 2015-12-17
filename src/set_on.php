@@ -60,23 +60,46 @@ class set_on {
      * @param mixed $val
      * @return boolean|self
      */
-    public function _ ($var = null, $val = null) {
-        if(!(isset($this) && get_class($this) == __CLASS__)) {
-            //we entered from static context
-            self::$_instance = new self;
-            $me = self::$_instance;
-        } else {
-            //we entered via instance
-            $me = $this;
-        }
-
+    public function viaInstance($var = null, $val = null) {
+        $me = $this;
         if(is_string($var) && !empty($var)) {
             $me->addVar($var, $val);
             return $me;
         } else if (is_object($var)) {
             return $me->r($var);
         }
+    }
 
+    public static function viaStatic($var = null, $val = null) {
+        $me = new set_on();
+        if(is_string($var) && !empty($var)) {
+            $me->addVar($var, $val);
+            return $me;
+        } else if (is_object($var)) {
+            return $me->r($var);
+        }
+    }
+
+    public function __call($name, $arguments) {
+        if ($name === '_') {
+            if(!isset($arguments[1])) {
+                $val = null;
+            } else {
+                $val = $arguments[1];
+            }
+            return call_user_func(array($this, 'viaInstance'), $arguments[0], $val);
+        }
+    }
+
+    public static function __callStatic($name, $arguments) {
+        if ($name === '_') {
+            if(!isset($arguments[1])) {
+                $val = null;
+            } else {
+                $val = $arguments[1];
+            }
+            return call_user_func(array(get_class(), 'viaStatic'),  $arguments[0], $val);
+        }
     }
 
     protected function r ($depedencyObject) {
